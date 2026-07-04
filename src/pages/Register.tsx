@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { Link, Navigate, useNavigate } from "react-router-dom";
 import { AuthLayout } from "../components/AuthLayout";
+import { PasswordInput } from "../components/PasswordInput";
 import { useAuth } from "../context/AuthContext";
 import { roleHome } from "../lib/roleHome";
 
@@ -185,14 +186,12 @@ export default function Register() {
           <label htmlFor="password" className="mb-1.5 block text-sm font-500">
             Password
           </label>
-          <input
+          <PasswordInput
             id="password"
-            type="password"
             autoComplete="new-password"
             required
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={inputClass}
+            onChange={setPassword}
             placeholder="At least 6 characters"
           />
         </div>
@@ -201,14 +200,12 @@ export default function Register() {
           <label htmlFor="confirm" className="mb-1.5 block text-sm font-500">
             Confirm password
           </label>
-          <input
+          <PasswordInput
             id="confirm"
-            type="password"
             autoComplete="new-password"
             required
             value={confirm}
-            onChange={(e) => setConfirm(e.target.value)}
-            className={inputClass}
+            onChange={setConfirm}
             placeholder="Re-enter your password"
           />
         </div>

@@ -1,12 +1,10 @@
 import { useState, type FormEvent } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthLayout } from "../components/AuthLayout";
+import { PasswordInput } from "../components/PasswordInput";
 import { useAuth } from "../context/AuthContext";
 import { supabase } from "../lib/supabase";
 import { roleHome } from "../lib/roleHome";
-
-const inputClass =
-  "w-full rounded-xl border border-[var(--line)] bg-[var(--bg-elevated)] px-4 py-2.5 text-sm outline-none transition-colors placeholder:text-[var(--ink-soft)]/60 focus:border-brand-blue";
 
 // Landing page for the emailed recovery link; sets a new password.
 export default function ResetPassword() {
@@ -75,27 +73,23 @@ export default function ResetPassword() {
         )}
         <div>
           <label htmlFor="password" className="mb-1.5 block text-sm font-500">New password</label>
-          <input
+          <PasswordInput
             id="password"
-            type="password"
             autoComplete="new-password"
             required
             value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            className={inputClass}
+            onChange={setPassword}
             placeholder="At least 6 characters"
           />
         </div>
         <div>
           <label htmlFor="confirm" className="mb-1.5 block text-sm font-500">Confirm password</label>
-          <input
+          <PasswordInput
             id="confirm"
-            type="password"
             autoComplete="new-password"
             required
             value={confirm}
-            onChange={(e) => setConfirm(e.target.value)}
-            className={inputClass}
+            onChange={setConfirm}
             placeholder="Re-enter your password"
           />
         </div>
