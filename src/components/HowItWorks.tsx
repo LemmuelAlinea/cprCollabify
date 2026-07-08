@@ -1,4 +1,5 @@
 import { Reveal } from "./Reveal";
+import { useScrollProgress } from "../hooks/useScrollFx";
 
 const steps = [
   {
@@ -28,14 +29,20 @@ const steps = [
   },
 ];
 
-// Numbered vertical timeline explaining the class-to-collaboration flow.
+// Vertical timeline whose gradient thread draws with scroll and reverses on the way up.
 export function HowItWorks() {
+  const { ref, progress } = useScrollProgress<HTMLOListElement>();
+  const filled = progress * steps.length;
+
   return (
-    <section id="how-it-works" className="scroll-mt-20 border-y border-[var(--line)] bg-[var(--bg-elevated)] py-24 sm:py-32">
+    <section
+      id="how-it-works"
+      className="scroll-mt-20 border-y border-[var(--line)] bg-[var(--bg-elevated)] py-24 sm:py-32"
+    >
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
-        <Reveal className="max-w-2xl">
-          <span className="text-sm font-600 text-gradient">How it works</span>
-          <h2 className="mt-3 text-3xl font-700 tracking-tight sm:text-4xl">
+        <Reveal variant="up" className="max-w-2xl">
+          <span className="eyebrow text-gradient">How it works</span>
+          <h2 className="mt-4 text-3xl font-700 tracking-tight sm:text-4xl">
             From class code to collaboration
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[var(--ink-soft)]">
@@ -43,21 +50,32 @@ export function HowItWorks() {
           </p>
         </Reveal>
 
-        <div className="mt-14 grid gap-x-10 gap-y-8 md:grid-cols-2">
-          {steps.map((s, i) => (
-            <Reveal key={s.n} delay={i * 70}>
-              <div className="flex gap-5">
-                <div className="flex-shrink-0">
-                  <span className="text-gradient text-2xl font-800">{s.n}</span>
-                </div>
-                <div className="border-b border-[var(--line)] pb-6">
-                  <h3 className="text-lg font-600">{s.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[var(--ink-soft)]">{s.desc}</p>
-                </div>
-              </div>
-            </Reveal>
-          ))}
-        </div>
+        <ol ref={ref} className="relative mx-auto mt-16 max-w-3xl">
+          {/* Thread track and scroll-drawn gradient fill */}
+          <div className="absolute bottom-2 left-[15px] top-2 w-px bg-[var(--line)]" />
+          <div
+            className="absolute left-[15px] top-2 w-px bg-brand-gradient"
+            style={{ height: `calc((100% - 1rem) * ${progress})` }}
+          />
+
+          {steps.map((s, i) => {
+            const active = i < filled;
+            return (
+              <li key={s.n} className="relative flex gap-6 pb-10 last:pb-0">
+                <span
+                  className={`relative z-10 mt-1 h-[9px] w-[9px] shrink-0 translate-x-[11px] rounded-full ring-4 ring-[var(--bg-elevated)] transition-colors duration-300 ${
+                    active ? "bg-brand-green" : "bg-[var(--line)]"
+                  }`}
+                />
+                <Reveal variant="left" delay={40} className="flex-1 pl-2">
+                  <span className="eyebrow text-gradient">{s.n}</span>
+                  <h3 className="mt-1.5 text-lg font-600">{s.title}</h3>
+                  <p className="mt-1.5 text-sm leading-relaxed text-[var(--ink-soft)]">{s.desc}</p>
+                </Reveal>
+              </li>
+            );
+          })}
+        </ol>
       </div>
     </section>
   );

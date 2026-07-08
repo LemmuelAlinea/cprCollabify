@@ -28,14 +28,14 @@ const features = [
   },
 ];
 
-// Feature grid built from the brand icon set with staggered scroll reveal.
+// Feature grid built from the brand icon set with directional scroll reveals.
 export function Features() {
   return (
     <section id="features" className="scroll-mt-20 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
-        <Reveal className="max-w-2xl">
-          <span className="text-sm font-600 text-gradient">Everything in one place</span>
-          <h2 className="mt-3 text-3xl font-700 tracking-tight sm:text-4xl">
+        <Reveal variant="up" className="max-w-2xl">
+          <span className="eyebrow text-gradient">Everything in one place</span>
+          <h2 className="mt-4 text-3xl font-700 tracking-tight sm:text-4xl">
             Tools that keep group projects moving
           </h2>
           <p className="mt-4 text-base leading-relaxed text-[var(--ink-soft)]">
@@ -46,7 +46,7 @@ export function Features() {
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((f, i) => (
-            <Reveal key={f.title} delay={i * 80}>
+            <Reveal key={f.title} variant="up" delay={(i % 3) * 90}>
               <article className="group h-full rounded-2xl border border-[var(--line)] bg-[var(--bg-elevated)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/30 hover:shadow-brand">
                 <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-[var(--bg)]">
                   <img src={f.icon} alt="" className="h-12 w-12 object-contain transition-transform duration-300 group-hover:scale-110" />
@@ -57,8 +57,7 @@ export function Features() {
             </Reveal>
           ))}
 
-          {/* Closing highlight card */}
-          <Reveal delay={features.length * 80}>
+          <Reveal variant="scale" delay={90}>
             <article className="flex h-full flex-col justify-center rounded-2xl bg-brand-gradient p-6 text-white shadow-brand">
               <h3 className="text-xl font-700">One class, fully organized</h3>
               <p className="mt-2 text-sm leading-relaxed text-white/85">

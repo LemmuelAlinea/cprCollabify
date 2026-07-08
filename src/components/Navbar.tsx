@@ -8,13 +8,18 @@ const links = [
   { label: "For educators", href: "#for-roles" },
 ];
 
-// Sticky top navigation; gains a blurred background once the page scrolls.
+// Sticky top navigation; gains a blurred background and a scroll-progress bar.
 export function Navbar() {
   const [scrolled, setScrolled] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 12);
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      setProgress(max > 0 ? window.scrollY / max : 0);
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -28,6 +33,11 @@ export function Navbar() {
           : "border-b border-transparent"
       }`}
     >
+      {/* Scroll progress indicator */}
+      <div
+        className="absolute inset-x-0 top-0 h-0.5 origin-left bg-brand-gradient transition-[width] duration-150"
+        style={{ width: `${(progress * 100).toFixed(2)}%` }}
+      />
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-5 sm:px-6">
         <a href="#top" className="flex items-center gap-2.5">
           <img src="/collabify-logo.png" alt="Collabify" className="h-8 w-8 object-contain" />

@@ -6,7 +6,7 @@ export function CTA() {
   return (
     <section className="pb-24 sm:pb-32">
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
-        <Reveal>
+        <Reveal variant="scale">
           <div className="relative overflow-hidden rounded-3xl bg-brand-gradient px-8 py-16 text-center text-white shadow-brand sm:px-16 sm:py-20">
             <div aria-hidden className="pointer-events-none absolute inset-0 opacity-20">
               <div className="absolute -left-10 -top-10 h-48 w-48 rounded-full bg-white blur-3xl" />

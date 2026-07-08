@@ -27,15 +27,15 @@ export function ForRoles() {
   return (
     <section id="for-roles" className="scroll-mt-20 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <span className="text-sm font-600 text-gradient">Built for both sides of the class</span>
-          <h2 className="mt-3 text-3xl font-700 tracking-tight sm:text-4xl">
-            One platform, two clear roles
+        <Reveal variant="up" className="mx-auto max-w-2xl text-center">
+          <span className="eyebrow text-gradient">Two roles, one platform</span>
+          <h2 className="mt-4 text-3xl font-700 tracking-tight sm:text-4xl">
+            Built for both sides of the class
           </h2>
         </Reveal>
 
         <div className="mt-14 grid gap-6 lg:grid-cols-2">
-          <Reveal>
+          <Reveal variant="left">
             <div className="h-full rounded-2xl border border-[var(--line)] bg-[var(--bg-elevated)] p-8">
               <span className="inline-flex rounded-full bg-brand-blue/10 px-3 py-1 text-xs font-600 text-brand-blue">
                 For professors
@@ -54,7 +54,7 @@ export function ForRoles() {
             </div>
           </Reveal>
 
-          <Reveal delay={100}>
+          <Reveal variant="right" delay={80}>
             <div className="h-full rounded-2xl border border-[var(--line)] bg-[var(--bg-elevated)] p-8">
               <span className="inline-flex rounded-full bg-brand-green/10 px-3 py-1 text-xs font-600 text-brand-green">
                 For students
