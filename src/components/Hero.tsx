@@ -5,8 +5,10 @@ const chips = ["Auto class codes", "3 ways to group", "Kanban + chat", "Live pro
 
 // Hero: blueprint-grid backdrop, staggered load, and a parallax icon cluster.
 export function Hero() {
-  const glow = useParallax<HTMLDivElement>(0.18);
+  const glow = useParallax<HTMLDivElement>(0.22);
   const cluster = useParallax<HTMLDivElement>(0.1);
+  const kanban = useParallax<HTMLDivElement>(0.16);
+  const analytics = useParallax<HTMLDivElement>(0.24);
 
   return (
     <section id="top" className="relative overflow-hidden">
@@ -93,17 +95,17 @@ export function Hero() {
             <div className="absolute inset-0 flex items-center justify-center">
               <img src="/icons/collaboration.png" alt="" className="w-4/5 animate-float drop-shadow-2xl" />
             </div>
-            <img
-              src="/icons/kanban.png"
-              alt=""
-              className="animate-float-slow absolute -left-2 top-6 w-24 drop-shadow-xl sm:w-28"
-            />
-            <img
-              src="/icons/analytics.png"
-              alt=""
-              className="animate-float absolute -right-1 bottom-8 w-24 drop-shadow-xl sm:w-28"
-              style={{ animationDelay: "1.5s" }}
-            />
+            <div ref={kanban} className="absolute -left-2 top-6">
+              <img src="/icons/kanban.png" alt="" className="animate-float-slow w-24 drop-shadow-xl sm:w-28" />
+            </div>
+            <div ref={analytics} className="absolute -right-1 bottom-8">
+              <img
+                src="/icons/analytics.png"
+                alt=""
+                className="animate-float w-24 drop-shadow-xl sm:w-28"
+                style={{ animationDelay: "1.5s" }}
+              />
+            </div>
           </div>
         </div>
       </div>

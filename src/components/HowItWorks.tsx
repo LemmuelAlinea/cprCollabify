@@ -67,7 +67,7 @@ export function HowItWorks() {
                     active ? "bg-brand-green" : "bg-[var(--line)]"
                   }`}
                 />
-                <Reveal variant="left" delay={40} className="flex-1 pl-2">
+                <Reveal variant="left" delay={i * 90} className="flex-1 pl-2">
                   <span className="eyebrow text-gradient">{s.n}</span>
                   <h3 className="mt-1.5 text-lg font-600">{s.title}</h3>
                   <p className="mt-1.5 text-sm leading-relaxed text-[var(--ink-soft)]">{s.desc}</p>

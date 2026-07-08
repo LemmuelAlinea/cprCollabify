@@ -1,4 +1,5 @@
 import { Reveal } from "./Reveal";
+import { useParallax } from "../hooks/useScrollFx";
 
 const features = [
   {
@@ -30,8 +31,16 @@ const features = [
 
 // Feature grid built from the brand icon set with directional scroll reveals.
 export function Features() {
+  const blob = useParallax<HTMLDivElement>(0.16);
+
   return (
-    <section id="features" className="scroll-mt-20 py-24 sm:py-32">
+    <section id="features" className="relative scroll-mt-20 py-24 sm:py-32">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div ref={blob} className="absolute inset-0">
+          <div className="absolute -right-20 top-1/4 h-96 w-96 rounded-full bg-brand-blue/10 blur-[120px]" />
+          <div className="absolute -left-24 bottom-0 h-80 w-80 rounded-full bg-brand-green/10 blur-[120px]" />
+        </div>
+      </div>
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
         <Reveal variant="up" className="max-w-2xl">
           <span className="eyebrow text-gradient">Everything in one place</span>
@@ -46,7 +55,7 @@ export function Features() {
 
         <div className="mt-14 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {features.map((f, i) => (
-            <Reveal key={f.title} variant="up" delay={(i % 3) * 90}>
+            <Reveal key={f.title} variant={i % 2 === 0 ? "up" : "scale"} delay={i * 100}>
               <article className="group h-full rounded-2xl border border-[var(--line)] bg-[var(--bg-elevated)] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-brand-blue/30 hover:shadow-brand">
                 <div className="flex h-16 w-16 items-center justify-center rounded-xl bg-[var(--bg)]">
                   <img src={f.icon} alt="" className="h-12 w-12 object-contain transition-transform duration-300 group-hover:scale-110" />
@@ -57,7 +66,7 @@ export function Features() {
             </Reveal>
           ))}
 
-          <Reveal variant="scale" delay={90}>
+          <Reveal variant="up" delay={features.length * 100}>
             <article className="flex h-full flex-col justify-center rounded-2xl bg-brand-gradient p-6 text-white shadow-brand">
               <h3 className="text-xl font-700">One class, fully organized</h3>
               <p className="mt-2 text-sm leading-relaxed text-white/85">

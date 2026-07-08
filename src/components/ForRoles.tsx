@@ -1,4 +1,5 @@
 import { Reveal } from "./Reveal";
+import { useParallax } from "../hooks/useScrollFx";
 
 const professor = [
   "Create classes with auto-generated join codes",
@@ -24,8 +25,15 @@ function Check() {
 
 // Two-column split contrasting the professor and student experience.
 export function ForRoles() {
+  const blob = useParallax<HTMLDivElement>(0.14);
+
   return (
-    <section id="for-roles" className="scroll-mt-20 py-24 sm:py-32">
+    <section id="for-roles" className="relative scroll-mt-20 py-24 sm:py-32">
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
+        <div ref={blob} className="absolute inset-0">
+          <div className="absolute left-1/2 top-1/3 h-96 w-96 -translate-x-1/2 rounded-full bg-brand-blue/10 blur-[130px]" />
+        </div>
+      </div>
       <div className="mx-auto max-w-6xl px-5 sm:px-6">
         <Reveal variant="up" className="mx-auto max-w-2xl text-center">
           <span className="eyebrow text-gradient">Two roles, one platform</span>
@@ -42,13 +50,13 @@ export function ForRoles() {
               </span>
               <h3 className="mt-4 text-xl font-700">Run the class, not the busywork</h3>
               <ul className="mt-6 space-y-4">
-                {professor.map((item) => (
-                  <li key={item} className="flex gap-3 text-sm text-[var(--ink-soft)]">
+                {professor.map((item, i) => (
+                  <Reveal as="li" key={item} variant="up" delay={i * 90} className="flex gap-3 text-sm text-[var(--ink-soft)]">
                     <span className="text-brand-blue">
                       <Check />
                     </span>
                     <span>{item}</span>
-                  </li>
+                  </Reveal>
                 ))}
               </ul>
             </div>
@@ -61,13 +69,13 @@ export function ForRoles() {
               </span>
               <h3 className="mt-4 text-xl font-700">Collaborate and see your growth</h3>
               <ul className="mt-6 space-y-4">
-                {student.map((item) => (
-                  <li key={item} className="flex gap-3 text-sm text-[var(--ink-soft)]">
+                {student.map((item, i) => (
+                  <Reveal as="li" key={item} variant="up" delay={i * 90} className="flex gap-3 text-sm text-[var(--ink-soft)]">
                     <span className="text-brand-green">
                       <Check />
                     </span>
                     <span>{item}</span>
-                  </li>
+                  </Reveal>
                 ))}
               </ul>
             </div>

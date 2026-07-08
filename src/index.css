@@ -41,6 +41,8 @@
 @layer base {
   html {
     scroll-behavior: smooth;
+    /* Clip horizontal overflow from slide-in reveals without breaking vertical scroll */
+    overflow-x: clip;
   }
 
   body {
@@ -99,22 +101,22 @@
   .reveal {
     opacity: 0;
     transition:
-      opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-      transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1),
+      transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
     will-change: opacity, transform;
   }
 
   .reveal-up {
-    transform: translateY(36px);
+    transform: translateY(64px);
   }
   .reveal-left {
-    transform: translateX(-48px);
+    transform: translate(-90px, 28px);
   }
   .reveal-right {
-    transform: translateX(48px);
+    transform: translate(90px, 28px);
   }
   .reveal-scale {
-    transform: scale(0.94);
+    transform: scale(0.88) translateY(40px);
   }
 
   .reveal.is-visible {
